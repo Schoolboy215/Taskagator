@@ -33,6 +33,7 @@ module.exports = function(app){
                 res.send('api works');
             });
             require('./users')(app,db);
+            require('./clients')(app,db);
             resolve(router);
         });
     });

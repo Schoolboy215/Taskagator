@@ -1,13 +1,15 @@
 <button mat-button [matMenuTriggerFor]="menu">Menu</button>
 <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <span>Redial</span>
+    <button mat-menu-item routerLink="/">
+        <span>Home</span>
     </button>
-    <button mat-menu-item disabled>
-      <span>Check voicemail</span>
+    <button mat-menu-item routerLink="/users">
+      <span>Users</span>
     </button>
-    <button mat-menu-item>
-      <span>Disable alerts</span>
+    <button mat-menu-item routerLink="/clients">
+      <span>Clients</span>
     </button>
   </mat-menu>
-<router-outlet></router-outlet>
+<section class="mat-typography">
+  <router-outlet></router-outlet>
+</section>

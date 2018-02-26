@@ -1,0 +1,11 @@
+<form [formGroup]="clientForm" novalidate (ngSubmit)="save(clientForm.value, clientForm.valid)">
+  <div>
+    <label>Name</label>
+    <input type="text" formControlName="name">
+    <small [hidden]="clientForm.controls.name.valid || (clientForm.controls.name.pristine && !submitted)">
+        Name is required (minimum 5 characters).
+    </small>
+  </div>
+  <button type="submit">Submit</button>
+
+</form>

@@ -11,18 +11,21 @@ import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { UsersService } from './users.service';
+import { ClientsComponent } from './clients/clients.component';
 
 // Define the routes
 const ROUTES = [
   {
     path: '',
     component: WelcomeComponent
-    //redirectTo: 'users',
-    //pathMatch: 'full'
   },
   {
     path: 'users',
     component: UsersComponent
+  },
+  {
+    path: 'clients',
+    component: ClientsComponent
   }
 ];
 
@@ -31,7 +34,8 @@ const ROUTES = [
   declarations: [
     AppComponent,
     UsersComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ClientsComponent
   ],
   imports: [
     BrowserModule,

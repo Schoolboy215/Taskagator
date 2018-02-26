@@ -3,22 +3,22 @@ module.exports = function(app, db){
         express = require('express'),
         router = express.Router();
         
-    var userController = require('../server_controllers/users');
+    var clientController = require('../server_controllers/clients');
 
 	router.get('/',function (req, res) {
-        userController.getAll(function(result) {
+        clientController.getAll(function(result) {
             res.json(result);
         });
     });
     router.get('/:id',function (req, res) {
-        res.send("This is for getting user " + req.params.id)
+        res.send("This is for getting client " + req.params.id)
     });
     router.post('/create', function(req,res) {
-        userController.createUser(req.body.name,function(result){
+        clientController.createClient(req.body.name,function(result){
             res.send(result);
         });
     });
 
-    app.use('/api/users',router);
+    app.use('/api/clients',router);
     return router;
 };

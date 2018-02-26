@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/Schoolboy215/Taskagator"
+    "type": "git",
+    "url": "https://github.com/Schoolboy215/Taskagator"
   },
   "scripts": {
     "ng": "ng",
