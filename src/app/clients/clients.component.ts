@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Clients } from '../clients';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ClientsService } from '../clients.service';
 
 @Component({
   selector: 'app-clients',
@@ -11,7 +12,9 @@ export class ClientsComponent implements OnInit {
   public clientForm: FormGroup;
   public submitted: boolean;
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(  private _fb: FormBuilder,
+                private clientsService: ClientsService
+  ) { }
 
   ngOnInit() {
     this.clientForm = this._fb.group({
@@ -21,8 +24,7 @@ export class ClientsComponent implements OnInit {
 
   save(model: Clients, isValid: boolean) {
     this.submitted = true;
-
-    console.log(model, isValid);
+    this.clientsService.createClient(model);
   }
 
 }

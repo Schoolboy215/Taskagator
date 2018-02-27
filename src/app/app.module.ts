@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatCardModule, MatButtonModule, MatMenuModule } from '@angular/material/';
@@ -12,6 +13,7 @@ import { UsersComponent } from './users/users.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { UsersService } from './users.service';
 import { ClientsComponent } from './clients/clients.component';
+import { ClientsService } from './clients.service';
 
 // Define the routes
 const ROUTES = [
@@ -40,13 +42,14 @@ const ROUTES = [
   imports: [
     BrowserModule,
     HttpModule,
+    ReactiveFormsModule,
 
     BrowserAnimationsModule,
     MatCardModule, MatButtonModule, MatMenuModule,
 
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [UsersService],
+  providers: [UsersService, ClientsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
