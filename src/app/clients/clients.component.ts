@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Clients } from '../clients';
+import { Client } from '../client';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ClientsService } from '../clients.service';
 
@@ -12,6 +12,8 @@ export class ClientsComponent implements OnInit {
   public clientForm: FormGroup;
   public submitted: boolean;
 
+  clients: any = [];
+
   constructor(  private _fb: FormBuilder,
                 private clientsService: ClientsService
   ) { }
@@ -19,10 +21,15 @@ export class ClientsComponent implements OnInit {
   ngOnInit() {
     this.clientForm = this._fb.group({
       name: ['']
-  });
+    });
+
+    this.clientsService.getAllClients().subscribe(clients => {
+      this.clients = clients;
+    });
+
   }
 
-  save(model: Clients, isValid: boolean) {
+  save(model: Client, isValid: boolean) {
     this.submitted = true;
     this.clientsService.createClient(model);
   }

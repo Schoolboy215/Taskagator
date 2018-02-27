@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatCardModule, MatButtonModule, MatMenuModule } from '@angular/material/';
+import { MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatFormFieldModule } from '@angular/material/';
 
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { UsersService } from './users.service';
 import { ClientsComponent } from './clients/clients.component';
 import { ClientsService } from './clients.service';
+import { ClientFormComponent } from './client-form/client-form.component';
 
 // Define the routes
 const ROUTES = [
@@ -37,15 +38,17 @@ const ROUTES = [
     AppComponent,
     UsersComponent,
     WelcomeComponent,
-    ClientsComponent
+    ClientsComponent,
+    ClientFormComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     ReactiveFormsModule,
+    FormsModule,
 
     BrowserAnimationsModule,
-    MatCardModule, MatButtonModule, MatMenuModule,
+    MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatFormFieldModule,
 
     RouterModule.forRoot(ROUTES)
   ],
