@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/observable';
 import { Client } from './client';
-import 'rxjs/add/operator/map';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class ClientsService {
@@ -28,8 +28,10 @@ export class ClientsService {
     });
   }
 
-  getClient(_name: string):Observable<any> {
-    return this.httpClient.get<Client>('/api/clients/'+_name);
+  getClient(_name: string):Observable<Client> {
+    return this.httpClient.get<Client>('/api/clients/'+_name).pipe(
+      catchError(this.handleError())
+    );
   }
 
   deleteClient(_client: Client):Observable<any> {
@@ -38,5 +40,12 @@ export class ClientsService {
 
   updateClient(_client: Client, _editedClient: Client):Observable<Client> {
     return this.httpClient.put<Client>('/api/clients/'+_client.name, _editedClient);
+  }
+
+  private handleError() {
+    return (error: any): Observable<any> => {
+      return;
+    };
+
   }
 }

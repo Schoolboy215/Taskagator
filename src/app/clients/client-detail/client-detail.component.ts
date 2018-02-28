@@ -24,12 +24,8 @@ export class ClientDetailComponent implements OnInit {
       this.editedClient = new Client(this.client.name);
     }, error => {
       this.client = null;
-      console.log(error);
-    },
-    () => {
-      console.log("somehow got here");
-    }
-    );
+      console.log("An error happened");
+    });
   }
 
   deleteClient(): void {
