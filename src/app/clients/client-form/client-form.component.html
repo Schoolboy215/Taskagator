@@ -1,0 +1,12 @@
+<div class="mat-app-background basic-container mat-typography">
+    <div mat-dialog-content>
+      <p>What is the client's name?</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.name">
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button [mat-dialog-close]="data.name">Submit</button>
+    </div>
+</div>

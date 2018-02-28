@@ -18,16 +18,9 @@ module.exports = function(app){
             const db = mongoose.connection;
 
             assert.notEqual(null,db);
-            console.log("Mongoose has connected to mangoDB");
+            console.log("Mongoose has connected to mongoDB");
 
             resolve(db);
-            //const db = MongoClient.connect(url, function(err, client) {
-            //    assert.equal(null, err);
-            //    console.log("API connected to mongoDB");
-        
-            //    const db = client.db(dbName);
-            //    resolve(db);
-            //});
         }).then(function(db){
             router.get('/', (req,res) =>{
                 res.send('api works');

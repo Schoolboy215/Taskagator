@@ -1,17 +1,38 @@
-const assert = require('assert');
 const clientModel = require('../models/index').Client;
 
 exports.createClient = function(name, callback) {
   clientModel.create({name : name}, function(err, result) {
-    assert.equal(err,null);
-    console.log("Inserted client");
-    callback(result);
+    try{
+      if (err != null)
+        throw err;
+      callback(result.name + " was added as a client");
+    }
+    catch (err) {
+      callback(err.errmsg.toString());
+    }
   });
 }
 
 exports.getAll = function(callback) {
   clientModel.find(function(err, clients) {
-    assert.equal(err, null);
     callback(clients);
+  });
+}
+
+exports.get = function(name, callback) {
+  clientModel.findOne({ 'name' : name }, function(err, client) {
+    callback(client);
+  });
+}
+
+exports.delete = function(name, callback) {
+  clientModel.deleteOne({ 'name' : name}, function(err) {
+    callback("Client deleted");
+  });
+}
+
+exports.update = function(name, newClient, callback) {
+  clientModel.updateOne({ 'name' : name }, newClient, function(err, client) {
+    callback(newClient);
   });
 }

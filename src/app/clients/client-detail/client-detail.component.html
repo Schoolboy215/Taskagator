@@ -1,0 +1,8 @@
+<div *ngIf="client">
+  <h1>{{client.name}}</h1>
+  <label>name:
+    <input matInput [(ngModel)]="editedClient.name" placeholder="name"/>
+  </label>
+  <button mat-button (click)="deleteClient()">Delete</button>
+  <button mat-button (click)="updateClient()">Update</button>
+</div>

@@ -10,12 +10,29 @@ module.exports = function(app, db){
             res.json(result);
         });
     });
-    router.get('/:id',function (req, res) {
-        res.send("This is for getting client " + req.params.id)
+    router.get('/:name',function (req, res) {
+        clientController.get(req.params.name, result => {
+            if (result != null)
+                res.json(result);
+            else
+                res.status(404).send("That client was not found");
+        });
     });
     router.post('/create', function(req,res) {
         clientController.createClient(req.body.name,function(result){
-            res.send(result);
+            res.json(result);
+        });
+    });
+
+    router.delete('/:name', function(req, res) {
+        clientController.delete(req.params.name, function(result){
+            res.json(result);
+        });
+    });
+
+    router.put('/:name', function(req,res) {
+        clientController.update(req.params.name, req.body, function(result) {
+            res.json(result);
         });
     });
 

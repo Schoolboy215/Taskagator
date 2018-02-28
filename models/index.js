@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = Schema({
-    name: String,
+    name: { type : String, unique : true, required : true },
     tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}]
 });
 
 var clientSchema = Schema({
-    name: String
+    name: { type : String, unique : true, required : true }
 });
 
 var taskSchema = Schema({

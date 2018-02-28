@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatFormFieldModule } from '@angular/material/';
+import { MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatFormFieldModule, MatDialogModule, MatSnackBarModule, MatListModule,MatDividerModule } from '@angular/material/';
 
 
 import { AppComponent } from './app.component';
@@ -13,23 +14,16 @@ import { UsersComponent } from './users/users.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { UsersService } from './users.service';
 import { ClientsComponent } from './clients/clients.component';
-import { ClientsService } from './clients.service';
-import { ClientFormComponent } from './client-form/client-form.component';
+import { ClientsService } from './clients/clients.service';
+import { ClientFormComponent } from './clients/client-form/client-form.component';
+import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
 
 // Define the routes
 const ROUTES = [
-  {
-    path: '',
-    component: WelcomeComponent
-  },
-  {
-    path: 'users',
-    component: UsersComponent
-  },
-  {
-    path: 'clients',
-    component: ClientsComponent
-  }
+  { path: '', component: WelcomeComponent },
+  { path: 'users', component: UsersComponent },
+  { path: 'clients', component: ClientsComponent },
+  { path: 'clients/:id', component: ClientDetailComponent }
 ];
 
 
@@ -39,16 +33,21 @@ const ROUTES = [
     UsersComponent,
     WelcomeComponent,
     ClientsComponent,
-    ClientFormComponent
+    ClientFormComponent,
+    ClientDetailComponent
+  ],
+  entryComponents: [
+    ClientFormComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
 
     BrowserAnimationsModule,
-    MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatFormFieldModule,
+    MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatFormFieldModule, MatDialogModule, MatSnackBarModule, MatListModule, MatDividerModule,
 
     RouterModule.forRoot(ROUTES)
   ],
