@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClientsService } from '../clients.service';
 import { Client } from '../client';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-client-detail',
@@ -12,7 +14,9 @@ export class ClientDetailComponent implements OnInit {
   client : Client;
   editedClient : Client;
   constructor(  private clientService: ClientsService,
-                private route: ActivatedRoute) { }
+                private route: ActivatedRoute,
+                private router: Router,
+                public snackBar: MatSnackBar ) { }
 
   ngOnInit() {
     this.getClient();
@@ -24,7 +28,8 @@ export class ClientDetailComponent implements OnInit {
       this.editedClient = new Client(this.client.name);
     }, error => {
       this.client = null;
-      console.log("An error happened");
+      this.snackBar.open(error,'',{duration: 3000});
+      this.router.navigateByUrl('/clients');
     });
   }
 

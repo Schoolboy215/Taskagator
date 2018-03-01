@@ -1,8 +1,8 @@
 <h1>Clients</h1>
 <mat-nav-list>
-    <mat-list-item [routerLink]="['/clients/' + client.name]" role="listitem" *ngFor="let client of clients">
+    <mat-list-item color="primary" [routerLink]="['/clients/' + client.name]" role="listitem" *ngFor="let client of clients">
         <h3>{{client.name}}</h3>
         <mat-divider></mat-divider>
     </mat-list-item>
 </mat-nav-list>
-<button mat-raised-button (click)="newClientModal()">Add client</button>
+<button mat-raised-button color="accent" (click)="newClientModal()">Add client</button>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Rx';
 import { Client } from './client';
 import { catchError, map } from 'rxjs/operators';
 
@@ -29,9 +29,13 @@ export class ClientsService {
   }
 
   getClient(_name: string):Observable<Client> {
-    return this.httpClient.get<Client>('/api/clients/'+_name).pipe(
-      catchError(this.handleError())
-    );
+    return this.httpClient.get<Client>('/api/clients/'+_name)
+    .map((response: Client) => {
+      return response;
+    })
+    .catch((error: any) => {
+      return Observable.throw(new Error(error.error));
+    });
   }
 
   deleteClient(_client: Client):Observable<any> {

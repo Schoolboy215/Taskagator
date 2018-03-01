@@ -12,11 +12,13 @@ import { MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatFormF
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { UsersService } from './users.service';
+import { UsersService } from './users/users.service';
 import { ClientsComponent } from './clients/clients.component';
 import { ClientsService } from './clients/clients.service';
 import { ClientFormComponent } from './clients/client-form/client-form.component';
 import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { UserFormComponent } from './users/user-form/user-form.component';
 
 // Define the routes
 const ROUTES = [
@@ -34,10 +36,13 @@ const ROUTES = [
     WelcomeComponent,
     ClientsComponent,
     ClientFormComponent,
-    ClientDetailComponent
+    ClientDetailComponent,
+    UserDetailComponent,
+    UserFormComponent
   ],
   entryComponents: [
     ClientFormComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,
