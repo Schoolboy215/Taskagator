@@ -1,18 +1,18 @@
-<h2>Users</h2>
-<div *ngFor="let user of users">
-  <mat-card class='example-card'>
-    <mat-card-header>
-      <mat-card-title>
-        <h2 class="mat-h2">{{ user.name }}</h2>
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Availability here</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>Tasks</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-divider></mat-divider>
-</div>
+<h1>Users</h1>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let user of users">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{user.name}}
+      </mat-panel-title>
+      <mat-panel-description *ngIf="user.status">
+        {{user.status}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-action-row>
+      <button mat-raised-button (click)="updateStatusModal(user)">Set status</button>
+      <button mat-raised-button [routerLink]="['/users/' + user.name]">User details</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
 <button mat-raised-button color="accent" (click)="newUserModal()">Add user</button>

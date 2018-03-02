@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var userSchema = Schema({
     name: { type : String, unique : true, required : true },
+    status: {type: String},
     tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}]
 });
 

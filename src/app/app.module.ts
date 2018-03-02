@@ -6,7 +6,9 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatFormFieldModule, MatDialogModule, MatSnackBarModule, MatListModule,MatDividerModule } from '@angular/material/';
+import {  MatCardModule, MatButtonModule, MatMenuModule, MatInputModule,
+          MatFormFieldModule, MatDialogModule, MatSnackBarModule, MatListModule,
+          MatDividerModule, MatExpansionModule } from '@angular/material/';
 
 
 import { AppComponent } from './app.component';
@@ -19,13 +21,18 @@ import { ClientFormComponent } from './clients/client-form/client-form.component
 import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { UserFormComponent } from './users/user-form/user-form.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { TaskFormComponent } from './tasks/task-form/task-form.component';
+import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
+import { TasksService } from './tasks/tasks.service';
 
 // Define the routes
 const ROUTES = [
   { path: '', component: WelcomeComponent },
   { path: 'users', component: UsersComponent },
+  { path: 'users/:name', component: UserDetailComponent },
   { path: 'clients', component: ClientsComponent },
-  { path: 'clients/:id', component: ClientDetailComponent }
+  { path: 'clients/:name', component: ClientDetailComponent }
 ];
 
 
@@ -38,11 +45,15 @@ const ROUTES = [
     ClientFormComponent,
     ClientDetailComponent,
     UserDetailComponent,
-    UserFormComponent
+    UserFormComponent,
+    TasksComponent,
+    TaskFormComponent,
+    TaskDetailComponent
   ],
   entryComponents: [
     ClientFormComponent,
-    UserFormComponent
+    UserFormComponent,
+    TaskFormComponent
   ],
   imports: [
     BrowserModule,
@@ -52,11 +63,13 @@ const ROUTES = [
     FormsModule,
 
     BrowserAnimationsModule,
-    MatCardModule, MatButtonModule, MatMenuModule, MatInputModule, MatFormFieldModule, MatDialogModule, MatSnackBarModule, MatListModule, MatDividerModule,
+    MatCardModule, MatButtonModule, MatMenuModule, MatInputModule,
+    MatFormFieldModule, MatDialogModule, MatSnackBarModule, MatListModule,
+    MatDividerModule, MatExpansionModule,
 
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [UsersService, ClientsService],
+  providers: [UsersService, ClientsService, TasksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

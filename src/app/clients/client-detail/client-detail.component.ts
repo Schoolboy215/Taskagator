@@ -23,7 +23,7 @@ export class ClientDetailComponent implements OnInit {
   }
 
   getClient(): void {
-    this.clientService.getClient(this.route.snapshot.paramMap.get('id')).subscribe( response => {
+    this.clientService.getClient(this.route.snapshot.paramMap.get('name')).subscribe( response => {
       this.client = response as Client;
       this.editedClient = new Client(this.client.name);
     }, error => {

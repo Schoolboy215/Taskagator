@@ -13,7 +13,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 export class UserFormComponent {
 
   constructor (
-    public dialogRef : MatDialogRef<UserFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any){}
+    public dialogRef : MatDialogRef<UserFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any){
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

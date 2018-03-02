@@ -22,4 +22,18 @@ export class UsersService {
       return response;
     });
   }
+
+  getUser(_name: string):Observable<User> {
+    return this.httpClient.get<User>('/api/users/'+_name)
+    .map((response: User) => {
+      return response;
+    })
+    .catch((error: any) => {
+      return Observable.throw(new Error(error.error));
+    });
+  }
+
+  updateUser(_user: User, _editedUser: User):Observable<User> {
+    return this.httpClient.put<User>('/api/users/'+_user.name, _editedUser);
+  }
 }

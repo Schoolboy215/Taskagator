@@ -1,12 +1,16 @@
 <div class="mat-typography">
   <div mat-dialog-content>
-    <p>What is the user's name?</p>
-    <mat-form-field>
+    <mat-form-field *ngIf="!data.updating">
+      <p>Name</p>
       <input matInput [(ngModel)]="data.name">
+    </mat-form-field>
+    <mat-form-field *ngIf="data.updating == 'status'">
+        <p>Status</p>
+        <input matInput [(ngModel)]="data.status">
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="data.name">Submit</button>
+    <button mat-button [mat-dialog-close]="data">Submit</button>
   </div>
 </div>
