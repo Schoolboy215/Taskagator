@@ -26,7 +26,6 @@ export class UsersComponent implements OnInit {
       this.users = users;
     });
   }
-
   newUserModal() {
     let dialogRef = this.dialog.open(UserFormComponent, {
       data: { name: '',
@@ -44,7 +43,6 @@ export class UsersComponent implements OnInit {
         });
     });
   }
-
   updateStatusModal(_user : User) {
     let dialogRef = this.dialog.open(UserFormComponent, {
       data: { name: _user.name,
@@ -53,7 +51,6 @@ export class UsersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      //console.log(result);
       if(result != undefined)
         result.user.status = result.status;
         this.usersService.updateUser(result.user, result.user).subscribe(serverResponse => {
@@ -65,5 +62,10 @@ export class UsersComponent implements OnInit {
         });
     });
   }
-
+  deleteUser(_user : User) {
+    this.usersService.deleteUser(_user).subscribe( serverResponse => {
+      this.snackBar.open(serverResponse, "", {duration: 2000})
+      this.loadUsers();
+    });
+  }
 }

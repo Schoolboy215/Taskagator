@@ -28,6 +28,26 @@ module.exports = function(app, db){
             res.json(result);
         });
     });
+    router.delete('/:name', function(req,res) {
+        userController.deleteUser(req.params.name, function(err) {
+            if (err)
+                res.status(400).send("Couldn't delete");
+            else
+                res.json("User deleted");
+        });
+    });
+
+    router.get('/:name/tasks', function(req,res) {
+        userController.getTasks(req.params.name, result => {
+            console.log(result);
+        })
+    })
+    router.put('/:name/tasks', function(req,res) {
+        userController.addTask(req.params.name, result => {
+            res.json(result);
+        })
+    })
+
     app.use('/api/users',router);
     return router;
 };

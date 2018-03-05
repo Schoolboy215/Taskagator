@@ -15,14 +15,15 @@ export class UsersService {
     return this.http.get('/api/users')
       .map(res => res.json());
   }
-
   createUser(name):Observable<User> {
     return this.httpClient.post<User>('/api/users/create', {"name" : name})
     .map((response: User) => {
       return response;
     });
   }
-
+  deleteUser(_user: User):Observable<any> {
+    return this.httpClient.delete('/api/users/'+_user.name);
+  }
   getUser(_name: string):Observable<User> {
     return this.httpClient.get<User>('/api/users/'+_name)
     .map((response: User) => {
@@ -32,8 +33,14 @@ export class UsersService {
       return Observable.throw(new Error(error.error));
     });
   }
-
   updateUser(_user: User, _editedUser: User):Observable<User> {
     return this.httpClient.put<User>('/api/users/'+_user.name, _editedUser);
+  }
+
+  getTasks(_user: User):Observable<any> {
+    return this.httpClient.get('/api/users/'+_user.name+'/tasks');
+  }
+  addTask(_user: User):Observable<User> {
+    return this.httpClient.put<User>('/api/users/'+_user.name+"/tasks","Task json here");
   }
 }
