@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { User } from './user';
+import { Task } from '../tasks/task';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
@@ -40,7 +41,7 @@ export class UsersService {
   getTasks(_user: User):Observable<any> {
     return this.httpClient.get('/api/users/'+_user.name+'/tasks');
   }
-  addTask(_user: User):Observable<User> {
-    return this.httpClient.put<User>('/api/users/'+_user.name+"/tasks","Task json here");
+  addTask(_user: User, _task: Task):Observable<User> {
+    return this.httpClient.put<User>('/api/users/'+_user.name+"/tasks",_task);
   }
 }

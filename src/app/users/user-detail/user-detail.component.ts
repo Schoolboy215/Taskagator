@@ -3,8 +3,12 @@ import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../user';
-import { MatSnackBar } from '@angular/material';
+import { Task } from '../../tasks/task';
 import { Observable } from 'rxjs/Rx';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
+
+import { TaskFormComponent } from '../../tasks/task-form/task-form.component';
+import { TasksComponent } from '../../tasks/tasks.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -14,15 +18,16 @@ import { Observable } from 'rxjs/Rx';
 export class UserDetailComponent implements OnInit {
 
   user : User = null;
+  tasks : any = null;
   constructor(  private userService : UsersService,
                 private router : Router,
                 private route : ActivatedRoute,
-                private snackBar : MatSnackBar) { }
+                private snackBar : MatSnackBar,
+                private dialog : MatDialog) { }
 
   ngOnInit() {
     this.getUser().subscribe(result => {
-      console.log("Get user has finished");
-      console.log(result);
+      this.getTasks();
     });
   }
 
@@ -41,16 +46,30 @@ export class UserDetailComponent implements OnInit {
       });
     });
   }
-
-  getTasks(): void {
+  getTasks(): void{
     this.userService.getTasks(this.user).subscribe( response => {
+      this.tasks = response;
       console.log(response);
     });
   }
-
-  addTask(): void {
-    this.userService.addTask(this.user).subscribe( response => {
-      console.log(response);
+  addTask(task : Task): void {
+    this.userService.addTask(this.user, task).subscribe( response => {
+      this.getTasks();
     })
+  }
+  newTaskModal(): void {
+    let dialogRef = this.dialog.open(TaskFormComponent, {
+      data: {  }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+      {
+        this.addTask(result);
+      }
+    });
+  }
+  deleteTask(): void {
+    console.log("Delete on User-detail");
   }
 }

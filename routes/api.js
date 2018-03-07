@@ -27,6 +27,7 @@ module.exports = function(app){
             });
             require('./users')(app,db);
             require('./clients')(app,db);
+            require('./tasks')(app,db);
             resolve(router);
         });
     });

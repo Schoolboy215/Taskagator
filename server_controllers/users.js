@@ -33,20 +33,24 @@ exports.deleteUser = function(name, callback) {
 }
 
 //User-Task functions
-exports.getTasks = function(name, callback) {
-  callback(userModel.findOne({'name' : name}).tasks);
-}
-exports.addTask = function(name, callback) {
-  const user = userModel.findOne({'name' : name});
-  var newTask = new taskModel( {
-    developer: user,
-    name: "TestName",
-    description: "TestDescription",
-    link: "TestLink"
+exports.addTask = function(name, task, callback) {
+  userModel.findOne({'name' : name}, (err, user) => {
+    var newTask = new taskModel( {
+      developer: user._id,
+      client: task.client,
+      name: task.name,
+      description: task.description,
+      link: task.link
+    });
+    newTask.save();
+  
+    user.tasks.push(newTask);
+    user.save();
+    callback(user);
   });
-  newTask.save();
-
-  user.tasks.push(newTask);
-  user.save();
-  callback(user);
+}
+exports.getTasks = function(user, callback) {
+  taskModel.find({'developer' : user._id}, (err, tasks) => {
+    callback(tasks);
+  });
 }

@@ -1,3 +1,17 @@
-<p>
-  tasks works!
-</p>
+<mat-accordion *ngIf="tasks">
+  <mat-expansion-panel *ngFor="let task of tasks">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{task.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{task.client}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>{{task.description}}</p>
+    <span *ngIf="task.link"><a href={{task.link}} target="blank">Link</a></span>
+    <mat-action-row>
+      <button mat-raised-button color="warn" (click)=deleteTask(task)>Delete</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

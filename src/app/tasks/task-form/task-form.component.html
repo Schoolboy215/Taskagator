@@ -1,3 +1,22 @@
-<p>
-  task-form works!
-</p>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-select placeholder="Client" [(ngModel)]="data.client">
+      <mat-option *ngFor="let client of clients" [value]="client._id">
+        {{ client.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Name" [(ngModel)]="data.name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Description" [(ngModel)]="data.description">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Link" [(ngModel)]="data.link">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data">Submit</button>
+</div>

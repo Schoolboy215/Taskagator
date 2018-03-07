@@ -37,16 +37,18 @@ module.exports = function(app, db){
         });
     });
 
-    router.get('/:name/tasks', function(req,res) {
-        userController.getTasks(req.params.name, result => {
-            console.log(result);
-        })
-    })
     router.put('/:name/tasks', function(req,res) {
-        userController.addTask(req.params.name, result => {
+        userController.addTask(req.params.name, req.body, result => {
             res.json(result);
-        })
+        });
     })
+    router.get('/:name/tasks', function(req,res) {
+        userController.get(req.params.name, result => {
+            userController.getTasks(result, tasks => {
+                res.json(tasks);
+            })
+        });
+    });
 
     app.use('/api/users',router);
     return router;
