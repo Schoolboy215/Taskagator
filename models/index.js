@@ -1,22 +1,22 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var userSchema = Schema({
-    name: { type : String, unique : true, required : true },
-    status: {type: String},
-    tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}]
-});
-
 var clientSchema = Schema({
     name: { type : String, unique : true, required : true }
 });
 
 var taskSchema = Schema({
-    developer: { type: Schema.Types.ObjectId, ref: 'User'},
-    client: {type: Schema.Types.ObjectId, ref: 'Client'},
+    developer: { type: object, ref: 'User'},//{ type: Schema.Types.ObjectId, ref: 'User'},
+    client: { type: clientSchema },
     name: String,
     description: String,
     link: String
+});
+
+userSchema = Schema({
+    name: { type : String, unique : true, required : true },
+    status: {type: String},
+    tasks: [taskSchema]
 });
 
 exports.User = mongoose.model('User', userSchema);

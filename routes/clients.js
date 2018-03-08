@@ -18,6 +18,13 @@ module.exports = function(app, db){
                 res.status(404).send("That client was not found");
         });
     });
+    router.get('/:name/tasks', function(req,res) {
+        clientController.get(req.params.name, result => {
+            clientController.getTasks(result, tasks => {
+                res.send(tasks);
+            })
+        });
+    });
     router.post('/create', function(req,res) {
         clientController.createClient(req.body.name,function(result){
             res.json(result);

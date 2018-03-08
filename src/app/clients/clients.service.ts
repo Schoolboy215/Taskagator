@@ -18,7 +18,6 @@ export class ClientsService {
       });
     });
   }
-
   createClient(_name : string) {
     return new Promise((resolve, reject) => {
       this.http.post('/api/clients/create', {"name" : _name})
@@ -27,7 +26,6 @@ export class ClientsService {
       });
     });
   }
-
   getClient(_name: string):Observable<Client> {
     return this.httpClient.get<Client>('/api/clients/'+_name)
     .map((response: Client) => {
@@ -37,15 +35,12 @@ export class ClientsService {
       return Observable.throw(new Error(error.error));
     });
   }
-
   deleteClient(_client: Client):Observable<any> {
     return this.httpClient.delete('/api/clients/' + _client.name);
   }
-
-  updateClient(_client: Client, _editedClient: Client):Observable<Client> {
-    return this.httpClient.put<Client>('/api/clients/'+_client.name, _editedClient);
+  getTasks(_client: Client):Observable<any> {
+    return this.httpClient.get('/api/clients/'+_client.name+'/tasks');
   }
-
   private handleError() {
     return (error: any): Observable<any> => {
       return;

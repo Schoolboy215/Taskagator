@@ -11,7 +11,7 @@
     </mat-expansion-panel-header>
     <mat-action-row>
       <button mat-raised-button (click)="updateStatusModal(user)">Set status</button>
-      <button mat-raised-button [routerLink]="['/users/' + user.name]">User details</button>
+      <button mat-raised-button [routerLink]="['/users/' + user.name]">Tasks</button>
       <button mat-raised-button color="warn" (click)="deleteUser(user)">Delete</button>
     </mat-action-row>
   </mat-expansion-panel>

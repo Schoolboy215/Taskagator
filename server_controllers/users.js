@@ -1,13 +1,15 @@
 const assert = require('assert');
 const userModel = require('../models/index').User;
 const taskModel = require('../models/index').Task;
+const clientModel = require('../models/index').Client;
 
 //User management functions
 exports.createUser = function(name, callback) {
   userModel.create({name : name, status : ""}, function(err, result) {
-    assert.equal(err,null);
-    console.log("Inserted user");
-    callback(result);
+    if (err)
+      callback(err.errmsg.toString());
+    else
+      callback(result);
   });
 }
 exports.getAll = function(callback) {
@@ -27,26 +29,32 @@ exports.update = function(name, newUser, callback) {
   });
 }
 exports.deleteUser = function(name, callback) {
-  userModel.deleteOne({'name' : name }, function(err) {
-    callback(err);
+  userModel.findOne({'name': name}).then(user => {
+    taskModel.deleteMany({'developer' : user._id}). then( result =>{
+      userModel.deleteOne({'name' : name }, function(err) {
+        callback(err);
+      });
+    });
   });
 }
 
 //User-Task functions
 exports.addTask = function(name, task, callback) {
   userModel.findOne({'name' : name}, (err, user) => {
-    var newTask = new taskModel( {
-      developer: user._id,
-      client: task.client,
-      name: task.name,
-      description: task.description,
-      link: task.link
+    clientModel.findOne({'_id' : task.client}, (err, client) => {
+      var newTask = new taskModel( {
+        developer: user._id,
+        client: client,
+        name: task.name,
+        description: task.description,
+        link: task.link
+      });
+      newTask.save();
+    
+      user.tasks.push(newTask);
+      user.save();
+      callback(user);
     });
-    newTask.save();
-  
-    user.tasks.push(newTask);
-    user.save();
-    callback(user);
   });
 }
 exports.getTasks = function(user, callback) {

@@ -49,7 +49,6 @@ export class UserDetailComponent implements OnInit {
   getTasks(): void{
     this.userService.getTasks(this.user).subscribe( response => {
       this.tasks = response;
-      console.log(response);
     });
   }
   addTask(task : Task): void {
@@ -69,7 +68,7 @@ export class UserDetailComponent implements OnInit {
       }
     });
   }
-  deleteTask(): void {
-    console.log("Delete on User-detail");
+  deletedTask(event): void {
+    this.getTasks();
   }
 }

@@ -21,7 +21,6 @@ export class TaskFormComponent implements OnInit {
   ngOnInit() {
     this.clientsService.getAllClients().then( clients => {
       this.clients = clients;
-      console.log(clients);
     })
   }
 

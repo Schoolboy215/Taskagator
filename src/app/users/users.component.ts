@@ -20,7 +20,6 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.loadUsers();
   }
-
   loadUsers() {
     this.usersService.getAllUsers().subscribe(users => {
       this.users = users;
@@ -40,6 +39,9 @@ export class UsersComponent implements OnInit {
             this.snackBar.open("User " + serverResponse.name + " was added.", "", {duration: 2000})
             this.loadUsers();
           }
+        }, error => {
+          this.snackBar.open(error, "", {duration: 2000})
+            this.loadUsers();
         });
     });
   }

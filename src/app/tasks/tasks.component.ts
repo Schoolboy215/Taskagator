@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from './task';
 import { TasksService } from './tasks.service';
 
@@ -9,13 +9,15 @@ import { TasksService } from './tasks.service';
 })
 export class TasksComponent implements OnInit {
   @Input() tasks : Task[];
+  @Output() deletedTask: EventEmitter<string> = new EventEmitter<string>();
+
   constructor( public tasksService: TasksService) { }
 
   ngOnInit() {
   }
   deleteTask(task : Task): void {
     this.tasksService.deleteTask(task).then(result => {
-      console.log(result);
+      this.deletedTask.emit("Task deleted");
     });
   }
 }

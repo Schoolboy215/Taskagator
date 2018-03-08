@@ -28,6 +28,11 @@ export class ClientsComponent implements OnInit {
       this.clients = clients;
     });
   }
+  deleteClient(client: Client) {
+    this.clientsService.deleteClient(client).subscribe(result => {
+      this.loadClients();
+    });
+  }
 
   newClientModal() {
     let dialogRef = this.dialog.open(ClientFormComponent, {

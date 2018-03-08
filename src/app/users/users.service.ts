@@ -20,6 +20,9 @@ export class UsersService {
     return this.httpClient.post<User>('/api/users/create', {"name" : name})
     .map((response: User) => {
       return response;
+    })
+    .catch((error: any) => {
+      return Observable.throw(new Error(error.error));
     });
   }
   deleteUser(_user: User):Observable<any> {

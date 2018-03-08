@@ -1,3 +1,5 @@
+const userModel = require('../models/index').User;
+
 module.exports = function(app, db){
 	var url = require('url'),
         express = require('express'),
@@ -20,7 +22,10 @@ module.exports = function(app, db){
     });
     router.post('/create', function(req,res) {
         userController.createUser(req.body.name,function(result){
-            res.send(result);
+            if (!(result instanceof userModel))
+                res.status(400).send(result)
+            else
+                res.send(result);
         });
     });
     router.put('/:name', function(req,res) {
@@ -36,7 +41,6 @@ module.exports = function(app, db){
                 res.json("User deleted");
         });
     });
-
     router.put('/:name/tasks', function(req,res) {
         userController.addTask(req.params.name, req.body, result => {
             res.json(result);
@@ -45,7 +49,7 @@ module.exports = function(app, db){
     router.get('/:name/tasks', function(req,res) {
         userController.get(req.params.name, result => {
             userController.getTasks(result, tasks => {
-                res.json(tasks);
+                res.send(tasks);
             })
         });
     });

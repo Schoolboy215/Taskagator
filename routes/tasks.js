@@ -6,11 +6,8 @@ module.exports = function(app, db){
     var taskController = require('../server_controllers/tasks');
 
     router.delete('/:id', function(req,res) {
-        taskController.deleteTask(req.params.id, function(err) {
-            if (err)
-                res.status(400).send("Couldn't delete");
-            else
-                res.json("Task deleted");
+        taskController.deleteTask(req.params.id, function(result) {
+            res.json(result);
         });
     });
 

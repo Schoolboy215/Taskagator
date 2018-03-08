@@ -1,8 +1,15 @@
 <h1>Clients</h1>
-<mat-nav-list>
-    <mat-list-item color="primary" [routerLink]="['/clients/' + client.name]" role="listitem" *ngFor="let client of clients">
-        <h3>{{client.name}}</h3>
-        <mat-divider></mat-divider>
-    </mat-list-item>
-</mat-nav-list>
+<mat-accordion *ngIf="clients">
+    <mat-expansion-panel *ngFor="let client of clients">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            {{client.name}}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-action-row>
+            <button mat-raised-button [routerLink]="['/clients/' + client.name]">Tasks</button>
+            <button mat-raised-button color="warn" (click)=deleteClient(client)>Delete</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>
 <button mat-raised-button color="accent" (click)="newClientModal()">Add client</button>

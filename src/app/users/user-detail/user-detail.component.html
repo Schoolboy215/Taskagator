@@ -1,5 +1,5 @@
 <section *ngIf="user">
   <h1>{{user.name}}</h1>
-  <app-tasks [tasks]=tasks></app-tasks>
+  <app-tasks [tasks]=tasks (deletedTask)="deletedTask($event)"></app-tasks>
   <button mat-raised-button color="accent" (click)="newTaskModal()">Add task</button>
 </section>
