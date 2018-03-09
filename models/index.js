@@ -6,8 +6,8 @@ var clientSchema = Schema({
 });
 
 var taskSchema = Schema({
-    developer: { type: object, ref: 'User'},//{ type: Schema.Types.ObjectId, ref: 'User'},
-    client: { type: clientSchema },
+    developer: { type: Schema.Types.ObjectId, ref: 'User'},
+    client: {type: Schema.Types.ObjectId, ref: 'Client'},
     name: String,
     description: String,
     link: String
@@ -16,7 +16,7 @@ var taskSchema = Schema({
 userSchema = Schema({
     name: { type : String, unique : true, required : true },
     status: {type: String},
-    tasks: [taskSchema]
+    tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}]
 });
 
 exports.User = mongoose.model('User', userSchema);

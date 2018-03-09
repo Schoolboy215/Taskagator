@@ -45,13 +45,6 @@ module.exports = function(app, db){
         userController.addTask(req.params.name, req.body, result => {
             res.json(result);
         });
-    })
-    router.get('/:name/tasks', function(req,res) {
-        userController.get(req.params.name, result => {
-            userController.getTasks(result, tasks => {
-                res.send(tasks);
-            })
-        });
     });
 
     app.use('/api/users',router);

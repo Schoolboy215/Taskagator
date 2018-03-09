@@ -27,7 +27,6 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getUser().subscribe(result => {
-      this.getTasks();
     });
   }
 
@@ -35,6 +34,7 @@ export class UserDetailComponent implements OnInit {
     return new Observable(observer => {
       this.userService.getUser(this.route.snapshot.paramMap.get('name')).subscribe( response => {
         this.user = response as User;
+        this.tasks = this.user.tasks;
         observer.next(this.user);
         observer.complete();
       }, error => {
@@ -46,14 +46,9 @@ export class UserDetailComponent implements OnInit {
       });
     });
   }
-  getTasks(): void{
-    this.userService.getTasks(this.user).subscribe( response => {
-      this.tasks = response;
-    });
-  }
   addTask(task : Task): void {
     this.userService.addTask(this.user, task).subscribe( response => {
-      this.getTasks();
+      this.getUser();
     })
   }
   newTaskModal(): void {
@@ -69,6 +64,6 @@ export class UserDetailComponent implements OnInit {
     });
   }
   deletedTask(event): void {
-    this.getTasks();
+    this.getUser();
   }
 }

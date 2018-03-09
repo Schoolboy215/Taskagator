@@ -19,7 +19,11 @@ exports.getAll = function(callback) {
   });
 }
 exports.get = function(name, callback) {
-  userModel.findOne({'name' : name}, function(err, user) {
+  userModel.findOne({'name' : name}).
+  populate({  path: 'tasks',
+              populate: { path: 'client'}
+  }).
+  exec(function(err, user) {
     callback(user);
   });
 }
@@ -55,10 +59,5 @@ exports.addTask = function(name, task, callback) {
       user.save();
       callback(user);
     });
-  });
-}
-exports.getTasks = function(user, callback) {
-  taskModel.find({'developer' : user._id}, (err, tasks) => {
-    callback(tasks);
   });
 }
