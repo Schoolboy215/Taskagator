@@ -48,7 +48,7 @@ export class UserDetailComponent implements OnInit {
   }
   addTask(task : Task): void {
     this.userService.addTask(this.user, task).subscribe( response => {
-      this.getUser();
+      this.getUser().subscribe(result=>{});
     })
   }
   newTaskModal(): void {
@@ -64,6 +64,6 @@ export class UserDetailComponent implements OnInit {
     });
   }
   deletedTask(event): void {
-    this.getUser();
+    this.getUser().subscribe(result=>{});
   }
 }
