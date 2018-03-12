@@ -1,4 +1,4 @@
 <div *ngIf="client">
   <h1>{{client.name}}</h1>
-  <app-tasks *ngIf="tasks" [tasks]=tasks></app-tasks>
+  <app-tasks *ngIf="tasks" [tasks]=tasks [viewMode]="'client'"></app-tasks>
 </div>

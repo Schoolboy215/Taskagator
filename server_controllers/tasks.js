@@ -16,3 +16,19 @@ exports.deleteTask = function(id, callback) {
     });
   });
 }
+exports.updateTask = function(id, newVersion, callback) {
+  taskModel.findById(id, (err, task) => {
+    task.set( { name: newVersion.name,
+                description: newVersion.description,
+                link: newVersion.link
+              });
+    task.save( (err, updatedTask) => {
+      callback(updatedTask);
+    });
+  });
+  //taskModel.findByIdAndUpdate(id, newVersion, (err,result) => {
+  //  console.log(err);
+  //  console.log(result);
+  //  callback(result);
+  //});
+}

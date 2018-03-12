@@ -25,7 +25,10 @@ exports.get = function(name, callback) {
   });
 }
 exports.getTasks = function(client, callback) {
-  taskModel.find({'client' : client}).then(tasks => {
+  taskModel.find({'client' : client}).
+  populate('client').
+  populate('developer').
+  exec((err,tasks) => {
     callback(tasks);
   });
 }

@@ -1,5 +1,5 @@
 <div mat-dialog-content>
-  <mat-form-field>
+  <mat-form-field *ngIf="!data.updating">
     <mat-select placeholder="Client" [(ngModel)]="data.client">
       <mat-option *ngFor="let client of clients" [value]="client._id">
         {{ client.name }}
@@ -10,7 +10,7 @@
     <input matInput placeholder="Name" [(ngModel)]="data.name">
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Description" [(ngModel)]="data.description">
+    <textarea matInput placeholder="Description" [(ngModel)]="data.description"></textarea>
   </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="Link" [(ngModel)]="data.link">
@@ -18,5 +18,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data">Create</button>
+  <button mat-button [mat-dialog-close]="data"><span *ngIf="data.updating">Update</span><span *ngIf="!data.updating">Create</span></button>
 </div>

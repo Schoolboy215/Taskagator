@@ -10,6 +10,11 @@ module.exports = function(app, db){
             res.json(result);
         });
     });
+    router.put('/:id', function(req,res) {
+        taskController.updateTask(req.params.id, req.body.task, result => {
+            res.json("Task updated");
+        });
+    });
 
     app.use('/api/tasks',router);
     return router;

@@ -26,3 +26,10 @@ $custom-app-theme: mat-dark-theme($custom-app-primary, $custom-app-accent, $cust
 a {
     color: mat-color($custom-app-accent, A100);
 }
+h2.user-status {
+    font-style: italic;
+}
+.mat-expansion-panel-body pre {
+    font-family: inherit;
+    font-style: inherit;
+}

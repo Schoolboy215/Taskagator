@@ -63,7 +63,14 @@ export class UserDetailComponent implements OnInit {
       }
     });
   }
+  
+  //These methods are for the task list component to call
   deletedTask(event): void {
+    this.snackBar.open(event,'',{duration: 3000});
+    this.getUser().subscribe(result=>{});
+  }
+  updatedTask(event: string): void {
+    this.snackBar.open(event,'',{duration: 3000});
     this.getUser().subscribe(result=>{});
   }
 }

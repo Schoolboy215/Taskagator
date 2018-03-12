@@ -1,5 +1,6 @@
 <section *ngIf="user">
   <h1>{{user.name}}</h1>
-  <app-tasks [tasks]=tasks (deletedTask)="deletedTask($event)"></app-tasks>
+  <h2 class="user-status" *ngIf="user.status">{{user.status}}</h2>
+  <app-tasks [tasks]=tasks (deletedTask)="deletedTask($event)" (updatedTask)="updatedTask($event)" [viewMode]="'user'"></app-tasks>
   <button mat-raised-button color="accent" (click)="newTaskModal()">Add task</button>
 </section>

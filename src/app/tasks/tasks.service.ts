@@ -17,12 +17,18 @@ export class TasksService {
       })
     });
   }
-
   deleteTask(task : Task) {
     return new Promise((resolve, reject) => {
       this.httpClient.delete('/api/tasks/'+task._id).subscribe(results => {
         resolve(results);
       })
+    });
+  }
+  updateTask(task: Task) {
+    return new Promise((resolve, reject) => {
+      this.httpClient.put('api/tasks/'+task._id, {task}).subscribe(results => {
+        resolve(results);
+      });
     });
   }
 }

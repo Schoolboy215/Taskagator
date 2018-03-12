@@ -1,16 +1,25 @@
+<mat-chip-list *ngIf="filters">
+  <mat-chip *ngFor="let filter of filters" (remove)="removeFilter(filter)">
+    {{filter.text}}
+    <mat-icon matChipRemove>cancel</mat-icon>
+  </mat-chip>
+</mat-chip-list>
 <mat-accordion *ngIf="tasks">
   <mat-expansion-panel *ngFor="let task of tasks">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{task.name}}
       </mat-panel-title>
-      <mat-panel-description>
-        {{task.client.name}}
+      <mat-panel-description [ngSwitch]="viewMode">
+        <span *ngSwitchCase="'tasks'">{{task.client.name}}</span>
+        <span *ngSwitchCase="'client'">{{task.developer.name}}</span>
+        <span *ngSwitchCase="'user'">{{task.client.name}}</span>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>{{task.description}}</p>
+    <pre>{{task.description}}</pre>
     <span *ngIf="task.link"><a href={{task.link}} target="blank">Link</a></span>
     <mat-action-row>
+      <button mat-raised-button (click)=updateTaskModal(task)>Edit</button>
       <button mat-raised-button color="warn" (click)=deleteTask(task)>Delete</button>
     </mat-action-row>
   </mat-expansion-panel>

@@ -8,7 +8,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {  MatCardModule, MatButtonModule, MatMenuModule, MatInputModule,
           MatFormFieldModule, MatDialogModule, MatSnackBarModule, MatListModule,
-          MatDividerModule, MatExpansionModule, MatSelectModule } from '@angular/material/';
+          MatDividerModule, MatExpansionModule, MatSelectModule,
+          MatChipsModule, MatIconModule } from '@angular/material/';
 
 
 import { AppComponent } from './app.component';
@@ -66,6 +67,7 @@ const ROUTES = [
     MatCardModule, MatButtonModule, MatMenuModule, MatInputModule,
     MatFormFieldModule, MatDialogModule, MatSnackBarModule, MatListModule,
     MatDividerModule, MatExpansionModule, MatSelectModule,
+    MatChipsModule, MatIconModule,
 
     RouterModule.forRoot(ROUTES)
   ],
