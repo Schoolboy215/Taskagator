@@ -1,26 +1,43 @@
-<mat-chip-list *ngIf="filters">
-  <mat-chip *ngFor="let filter of filters" (remove)="removeFilter(filter)">
-    {{filter.text}}
-    <mat-icon matChipRemove>cancel</mat-icon>
-  </mat-chip>
-</mat-chip-list>
-<mat-accordion *ngIf="tasks">
-  <mat-expansion-panel *ngFor="let task of tasks">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{task.name}}
-      </mat-panel-title>
-      <mat-panel-description [ngSwitch]="viewMode">
-        <span *ngSwitchCase="'tasks'">{{task.client.name}}</span>
-        <span *ngSwitchCase="'client'">{{task.developer.name}}</span>
-        <span *ngSwitchCase="'user'">{{task.client.name}}</span>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <pre>{{task.description}}</pre>
-    <span *ngIf="task.link"><a href={{task.link}} target="blank">Link</a></span>
-    <mat-action-row>
-      <button mat-raised-button (click)=updateTaskModal(task)>Edit</button>
-      <button mat-raised-button color="warn" (click)=deleteTask(task)>Delete</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
+<mat-card class="custom-filter-card">  <!--Filter card-->
+  <mat-card-title>
+    Filters
+  </mat-card-title>
+  <mat-card-content>
+    <mat-chip-list *ngIf="filters">
+      <mat-chip *ngFor="let filter of filters" (remove)="removeFilter(filter)">
+        {{filter.text}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button (click)="addFilter()"><mat-icon>add</mat-icon></button>
+  </mat-card-actions>
+</mat-card>
+<mat-card>  <!--Tasks card-->
+  <mat-card-title>
+    Tasks
+  </mat-card-title>
+  <mat-card-content>
+    <mat-accordion *ngIf="tasks">
+      <mat-expansion-panel *ngFor="let task of refinedTasks">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{task.name}}
+          </mat-panel-title>
+          <mat-panel-description [ngSwitch]="viewMode">
+            <span *ngSwitchCase="'tasks'">{{task.client.name}}</span>
+            <span *ngSwitchCase="'client'">{{task.developer.name}}</span>
+            <span *ngSwitchCase="'user'">{{task.client.name}}</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <pre>{{task.description}}</pre>
+        <span *ngIf="task.link"><a href={{task.link}} target="blank">Link</a></span>
+        <mat-action-row>
+          <button mat-raised-button (click)=updateTaskModal(task)>Edit</button>
+          <button mat-raised-button color="warn" (click)=deleteTask(task)>Delete</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>

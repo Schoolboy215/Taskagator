@@ -33,3 +33,9 @@ h2.user-status {
     font-family: inherit;
     font-style: inherit;
 }
+.custom-filter-card {
+    background-color: mat-color($mat-grey, 600);
+}
+mat-form-field.mat-primary {
+    color: mat-color($custom-app-primary, 300);
+}

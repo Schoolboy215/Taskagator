@@ -27,7 +27,6 @@ export class ClientDetailComponent implements OnInit {
       this.getTasks();
     });
   }
-
   getClient(): Observable<null> {
     return new Observable(observer => {
       this.clientService.getClient(this.route.snapshot.paramMap.get('name')).subscribe( response => {
@@ -42,11 +41,17 @@ export class ClientDetailComponent implements OnInit {
       });
     });
   }
-
   getTasks(): void {
     this.clientService.getTasks(this.client).subscribe(tasks => {
       this.tasks = tasks;
     });
   }
-
+  deletedTask(event: string): void {
+    this.snackBar.open(event, '', {duration:3000});
+    this.getTasks();
+  }
+  updatedTask(event: string): void {
+    this.snackBar.open(event, '', {duration:3000});
+    this.getTasks();
+  }
 }

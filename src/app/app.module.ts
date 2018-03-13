@@ -26,6 +26,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TasksService } from './tasks/tasks.service';
+import { NewFilterFormComponent } from './tasks/new-filter-form/new-filter-form.component';
 
 // Define the routes
 const ROUTES = [
@@ -49,12 +50,14 @@ const ROUTES = [
     UserFormComponent,
     TasksComponent,
     TaskFormComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    NewFilterFormComponent
   ],
   entryComponents: [
     ClientFormComponent,
     UserFormComponent,
-    TaskFormComponent
+    TaskFormComponent,
+    NewFilterFormComponent
   ],
   imports: [
     BrowserModule,

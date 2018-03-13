@@ -15,7 +15,6 @@ module.exports = function(app, db){
             res.json("Task updated");
         });
     });
-
     app.use('/api/tasks',router);
     return router;
 };

@@ -26,9 +26,4 @@ exports.updateTask = function(id, newVersion, callback) {
       callback(updatedTask);
     });
   });
-  //taskModel.findByIdAndUpdate(id, newVersion, (err,result) => {
-  //  console.log(err);
-  //  console.log(result);
-  //  callback(result);
-  //});
 }
