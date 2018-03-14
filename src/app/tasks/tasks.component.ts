@@ -63,7 +63,7 @@ export class TasksComponent implements OnInit {
         case 'client':
           for(var index=this.refinedTasks.length-1; index >= 0; index--) {
             var task = this.refinedTasks[index];
-            if (task.client._id != filter.data)
+            if (filter.data.indexOf(task.client._id) < 0)
               this.refinedTasks.splice(index,1);
           };
           break;
@@ -89,6 +89,7 @@ export class TasksComponent implements OnInit {
       data: { screen: this.viewMode }
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
       if (result)
       {
         var newFilter: any = {};
@@ -96,8 +97,14 @@ export class TasksComponent implements OnInit {
         {
           case 'client':
             newFilter.type = "client";
-            newFilter.text = "Client: " + result.client.name;
-            newFilter.data = result.client._id;
+            newFilter.text = "Client: ";
+            newFilter.data = [];
+            result.client.forEach(client => {
+              newFilter.text += client.name + ", ";
+              newFilter.data.push(client._id);
+            });
+            newFilter.text = newFilter.text.slice(0,-2);
+            //newFilter.data = result.client;
             break;
           case 'developer':
             newFilter.type = 'developer';
