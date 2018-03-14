@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -17,6 +17,7 @@ import { TasksComponent } from '../../tasks/tasks.component';
 })
 export class UserDetailComponent implements OnInit {
 
+  @ViewChild('tasksComponent') child;
   user : User = null;
   tasks : any = null;
   constructor(  private userService : UsersService,
@@ -48,7 +49,9 @@ export class UserDetailComponent implements OnInit {
   }
   addTask(task : Task): void {
     this.userService.addTask(this.user, task).subscribe( response => {
-      this.getUser().subscribe(result=>{});
+      this.getUser().subscribe(result=>{
+        this.updateTaskChild();
+      });
     })
   }
   newTaskModal(): void {
@@ -67,10 +70,21 @@ export class UserDetailComponent implements OnInit {
   //These methods are for the task list component to call
   deletedTask(event): void {
     this.snackBar.open(event,'',{duration: 3000});
-    this.getUser().subscribe(result=>{});
+    this.getUser().subscribe(result=>{
+      this.updateTaskChild();
+    });
   }
   updatedTask(event: string): void {
     this.snackBar.open(event,'',{duration: 3000});
-    this.getUser().subscribe(result=>{});
+    this.getUser().subscribe(result=>{
+      this.updateTaskChild();
+    });
+  }
+
+  updateTaskChild(): void {
+    if (this.child){
+      this.child.tasks = this.tasks;
+      this.child.processFilters();
+    }
   }
 }

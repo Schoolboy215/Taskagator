@@ -15,6 +15,11 @@ module.exports = function(app, db){
             res.json("Task updated");
         });
     });
+    router.get('/', function(req,res) {
+        taskController.getAllTasks(tasks => {
+            res.json(tasks);
+        })
+    })
     app.use('/api/tasks',router);
     return router;
 };

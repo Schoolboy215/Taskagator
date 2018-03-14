@@ -34,7 +34,8 @@ const ROUTES = [
   { path: 'users', component: UsersComponent },
   { path: 'users/:name', component: UserDetailComponent },
   { path: 'clients', component: ClientsComponent },
-  { path: 'clients/:name', component: ClientDetailComponent }
+  { path: 'clients/:name', component: ClientDetailComponent },
+  { path: 'tasks', component: TasksComponent }
 ];
 
 

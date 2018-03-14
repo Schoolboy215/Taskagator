@@ -26,7 +26,7 @@
             {{task.name}}
           </mat-panel-title>
           <mat-panel-description [ngSwitch]="viewMode">
-            <span *ngSwitchCase="'tasks'">{{task.client.name}}</span>
+            <span *ngSwitchCase="'tasks'">{{task.client.name}} | {{task.developer.name}}</span>
             <span *ngSwitchCase="'client'">{{task.developer.name}}</span>
             <span *ngSwitchCase="'user'">{{task.client.name}}</span>
           </mat-panel-description>

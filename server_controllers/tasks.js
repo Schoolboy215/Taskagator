@@ -27,3 +27,11 @@ exports.updateTask = function(id, newVersion, callback) {
     });
   });
 }
+exports.getAllTasks = function(callback) {
+  taskModel.find().
+  populate('client').
+  populate('developer').
+  exec((err, tasks) => {
+    callback(tasks);
+  });
+}

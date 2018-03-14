@@ -1,4 +1,4 @@
 <div *ngIf="client">
   <h1>{{client.name}}</h1>
-  <app-tasks *ngIf="tasks" [tasks]=tasks (deletedTask)="deletedTask($event)" (updatedTask)="updatedTask($event)" [viewMode]="'client'"></app-tasks>
+  <app-tasks #tasksComponent *ngIf="tasks" [tasks]=tasks (deletedTask)="deletedTask($event)" (updatedTask)="updatedTask($event)" [viewMode]="'client'"></app-tasks>
 </div>

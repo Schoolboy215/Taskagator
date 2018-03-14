@@ -31,4 +31,7 @@ export class TasksService {
       });
     });
   }
+  getAllTasks():Observable<any> {
+    return this.httpClient.get('/api/tasks');
+  }
 }

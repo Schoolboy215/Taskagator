@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ActivatedRoute } from '@angular/router';
 import { ClientsService } from '../clients.service';
@@ -14,6 +14,7 @@ import { TasksComponent } from '../../tasks/tasks.component';
   styleUrls: ['./client-detail.component.css']
 })
 export class ClientDetailComponent implements OnInit {
+  @ViewChild('tasksComponent') child;
   client : Client;
   editedClient : Client;
   tasks : any = null;
@@ -44,6 +45,10 @@ export class ClientDetailComponent implements OnInit {
   getTasks(): void {
     this.clientService.getTasks(this.client).subscribe(tasks => {
       this.tasks = tasks;
+      if (this.child) {
+        this.child.tasks = this.tasks;
+        this.child.processFilters();
+      }
     });
   }
   deletedTask(event: string): void {

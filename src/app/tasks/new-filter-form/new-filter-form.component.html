@@ -1,21 +1,25 @@
 <div mat-dialog-content>
-  <mat-form-field color="primary" style="display:block">
-    <mat-select placeholder="Client" [(ngModel)]="data.client">
-      <mat-option *ngFor="let client of clients; let i = index" [value]="clients[i]">
-        {{ client.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button mat-raised-button color="accent" (click)=addClientFilter(data.client)>Add a client filter</button>
+  <div *ngIf="data.screen != 'client'">
+    <mat-form-field color="primary" style="display:block">
+      <mat-select placeholder="Client" [(ngModel)]="data.client">
+        <mat-option *ngFor="let client of clients; let i = index" [value]="clients[i]">
+          {{ client.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)=addClientFilter(data.client)>Add a client filter</button>
+  </div>
 
-  <mat-form-field color="primary" style="display:block">
-    <mat-select placeholder="Developer" [(ngModel)]="data.developer">
-      <mat-option *ngFor="let developer of devs; let i = index" [value]="devs[i]">
-        {{ developer.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button mat-raised-button color="accent" (click)="addDevFilter()">Add a developer filter</button>
+  <div *ngIf="data.screen != 'user'">
+    <mat-form-field color="primary" style="display:block">
+      <mat-select placeholder="Developer" [(ngModel)]="data.developer">
+        <mat-option *ngFor="let developer of devs; let i = index" [value]="devs[i]">
+          {{ developer.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="addDevFilter()">Add a developer filter</button>
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
