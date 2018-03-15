@@ -1,3 +1,5 @@
+const config = require("../config/mongoDB");
+
 module.exports = function(app){
     return new Promise(function(resolve, reject) {
         var express = require('express');
@@ -7,7 +9,7 @@ module.exports = function(app){
         var mongoose = require('mongoose');
 
         const assert = require('assert');
-        const url = "mongodb://jmckay:fitz7000@cluster0-shard-00-00-xb5wm.mongodb.net:27017,cluster0-shard-00-01-xb5wm.mongodb.net:27017,cluster0-shard-00-02-xb5wm.mongodb.net:27017/taskagator?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
+        const url = config.connectionString;
         // Database Name
         const dbName = 'taskagator';
 
