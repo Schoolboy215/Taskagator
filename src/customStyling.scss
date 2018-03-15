@@ -39,3 +39,7 @@ h2.user-status {
 mat-form-field.mat-primary {
     color: mat-color($custom-app-primary, 300);
 }
+.mat-expansion-panel-header-title, 
+.mat-expansion-panel-header-description {
+  flex-basis: 0;
+}

@@ -14,7 +14,8 @@ import { EventListener } from '@angular/core/src/debug/debug_node';
 })
 export class TasksComponent implements OnInit {
   public filters: any = [];//[{text:"Client: Malco"}, {text:"Client: Heartland"}];
-  public refinedTasks : any[];
+  public refinedTasks: any[];
+  private runningStandalone: boolean = false;
   @Input() tasks : Task[];
   @Input() viewMode: string = "tasks";
   @Output() deletedTask: EventEmitter<string> = new EventEmitter<string>();
@@ -26,17 +27,25 @@ export class TasksComponent implements OnInit {
   ngOnInit() {
     if (this.tasks)
       this.processFilters();
-    else
+    else {
+      this.runningStandalone = true;
       this.loadStandalone();
+    }
   }
   deleteTask(task : Task): void {
     this.tasksService.deleteTask(task).then(result => {
-      this.deletedTask.emit("Task deleted");
+      if (this.runningStandalone)
+        this.loadStandalone();
+      else
+        this.deletedTask.emit("Task deleted");
     });
   }
   updateTask(task: Task): void {
     this.tasksService.updateTask(task).then( result => {
-      this.updatedTask.emit(result.toString());
+      if (this.runningStandalone)
+        this.loadStandalone();
+      else
+        this.updatedTask.emit(result.toString());
     });
   }
   updateTaskModal(task: Task): void {
@@ -70,7 +79,7 @@ export class TasksComponent implements OnInit {
         case 'developer':
           for(var index=this.refinedTasks.length-1; index >= 0; index--) {
             var task = this.refinedTasks[index];
-            if (task.developer._id != filter.data)
+            if (filter.data.indexOf(task.developer._id) < 0)
               this.refinedTasks.splice(index,1);
           };
           break;
@@ -89,7 +98,6 @@ export class TasksComponent implements OnInit {
       data: { screen: this.viewMode }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result)
       {
         var newFilter: any = {};
@@ -104,12 +112,16 @@ export class TasksComponent implements OnInit {
               newFilter.data.push(client._id);
             });
             newFilter.text = newFilter.text.slice(0,-2);
-            //newFilter.data = result.client;
             break;
           case 'developer':
             newFilter.type = 'developer';
-            newFilter.text = "Dev: " + result.developer.name;
-            newFilter.data = result.developer._id;
+            newFilter.text = "Dev: ";
+            newFilter.data = [];
+            result.developer.forEach(dev => {
+              newFilter.text += dev.name + ", ";
+              newFilter.data.push(dev._id);
+            });
+            newFilter.text = newFilter.text.slice(0,-2);
             break;
         }
         this.filters.push(newFilter);

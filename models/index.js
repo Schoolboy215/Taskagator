@@ -7,9 +7,9 @@ var clientSchema = Schema({
 
 var taskSchema = Schema({
     developer: { type: Schema.Types.ObjectId, ref: 'User'},
-    client: {type: Schema.Types.ObjectId, ref: 'Client'},
-    name: String,
-    description: String,
+    client: {type: Schema.Types.ObjectId, ref: 'Client', required: true},
+    name: { type: String, required : true},
+    description: { type: String, required: true},
     link: String
 });
 

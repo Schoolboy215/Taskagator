@@ -49,6 +49,10 @@ export class UserDetailComponent implements OnInit {
   }
   addTask(task : Task): void {
     this.userService.addTask(this.user, task).subscribe( response => {
+      if (response.errors)
+        this.snackBar.open(response.message,'',{duration: 2000});
+      else
+        this.snackBar.open('Task added','',{duration: 2000});
       this.getUser().subscribe(result=>{
         this.updateTaskChild();
       });

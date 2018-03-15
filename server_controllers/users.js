@@ -53,11 +53,15 @@ exports.addTask = function(name, task, callback) {
         description: task.description,
         link: task.link
       });
-      newTask.save();
-    
-      user.tasks.push(newTask);
-      user.save();
-      callback(user);
+      newTask.save( err => {
+        if (!err){
+          user.tasks.push(newTask);
+          user.save();
+          callback(user);
+        }
+        else
+          callback(err);
+      });      
     });
   });
 }

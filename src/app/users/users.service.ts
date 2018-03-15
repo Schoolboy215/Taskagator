@@ -44,7 +44,7 @@ export class UsersService {
   getTasks(_user: User):Observable<any> {
     return this.httpClient.get('/api/users/'+_user.name+'/tasks');
   }
-  addTask(_user: User, _task: Task):Observable<User> {
-    return this.httpClient.put<User>('/api/users/'+_user.name+"/tasks",_task);
+  addTask(_user: User, _task: Task):Observable<any> {
+    return this.httpClient.put<any>('/api/users/'+_user.name+"/tasks",_task);
   }
 }

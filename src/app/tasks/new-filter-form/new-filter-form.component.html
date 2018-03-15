@@ -12,7 +12,7 @@
 
   <div *ngIf="data.screen != 'user'">
     <mat-form-field color="primary" style="display:block">
-      <mat-select placeholder="Developer" [(ngModel)]="data.developer">
+      <mat-select placeholder="Developer" [(ngModel)]="data.developer" multiple>
         <mat-option *ngFor="let developer of devs; let i = index" [value]="devs[i]">
           {{ developer.name }}
         </mat-option>

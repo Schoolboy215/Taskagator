@@ -14,7 +14,9 @@ exports.createClient = function(name, callback) {
   });
 }
 exports.getAll = function(callback) {
-  clientModel.find(function(err, clients) {
+  clientModel.find().
+  sort('name').
+  exec((err, clients) => {
     callback(clients);
   });
 }
