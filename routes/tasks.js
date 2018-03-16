@@ -1,3 +1,5 @@
+const ensureAuthenticated = require('./ensureAuthenticated');
+
 module.exports = function(app, db){
 	var url = require('url'),
         express = require('express'),
@@ -20,6 +22,6 @@ module.exports = function(app, db){
             res.json(tasks);
         })
     })
-    app.use('/api/tasks',router);
+    app.use('/api/tasks', ensureAuthenticated, router);
     return router;
 };

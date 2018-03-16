@@ -4,8 +4,11 @@ const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+
+const sessionConfig = require('./config/session');
  
-require('./routes/index');
+const ensureAuthenticated = require('./routes/ensureAuthenticated');
  
 var app = express();
  
@@ -19,14 +22,25 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(cookieParser());
+app.use(require('express-session')({
+    secret: sessionConfig.secret,
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(express.static(path.join(__dirname, 'dist')));
+
+//Passport setup
+app.use(passport.initialize());
+app.use(passport.session());
  
 require('./routes/api')(app).then(result => {
     app.use('/api', result);
-    app.get('*', (req, res) => {
+
+    app.get('*', ensureAuthenticated.ensureAuthenticated, function(req,res,next) {
         res.sendFile(path.join(__dirname, 'dist/index.html'));
     });
 
+    //Start the server
     const server = http.createServer(app);
     server.listen(3000, function() {
         var host = 'localhost';

@@ -13,8 +13,13 @@ export class UsersService {
               private httpClient: HttpClient) { }
 
   getAllUsers() {
-    return this.http.get('/api/users')
-      .map(res => res.json());
+    return this.httpClient.get('/api/users')
+      .map(res => {return res})
+      .catch((error: any) => {
+        console.log("error next");
+        console.log(error);
+        return Observable.throw(new Error(error));
+      });
   }
   createUser(name):Observable<User> {
     return this.httpClient.post<User>('/api/users/create', {"name" : name})

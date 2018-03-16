@@ -1,3 +1,5 @@
+const ensureAuthenticated = require('./ensureAuthenticated');
+
 module.exports = function(app, db){
 	var url = require('url'),
         express = require('express'),
@@ -5,12 +7,12 @@ module.exports = function(app, db){
         
     var clientController = require('../server_controllers/clients');
 
-	router.get('/',function (req, res) {
+	router.get('/', function (req, res) {
         clientController.getAll(function(result) {
             res.json(result);
         });
     });
-    router.get('/:name',function (req, res) {
+    router.get('/:name', function (req, res) {
         clientController.get(req.params.name, result => {
             if (result != null)
                 res.json(result);
@@ -43,6 +45,6 @@ module.exports = function(app, db){
         });
     });
 
-    app.use('/api/clients',router);
+    app.use('/api/clients', ensureAuthenticated.ensureAuthenticated, router);
     return router;
 };

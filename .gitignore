@@ -2,6 +2,8 @@
 
 # sensitive info
 /config/mongoDB.js
+/config/microsoft.auth.js
+/config/session.js
 
 # compiled output
 /dist

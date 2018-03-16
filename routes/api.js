@@ -1,4 +1,5 @@
 const config = require("../config/mongoDB");
+const ensureAuthenticated = require("./ensureAuthenticated");
 
 module.exports = function(app){
     return new Promise(function(resolve, reject) {
@@ -27,9 +28,12 @@ module.exports = function(app){
             router.get('/', (req,res) =>{
                 res.send('api works');
             });
+
             require('./users')(app,db);
             require('./clients')(app,db);
             require('./tasks')(app,db);
+            require('./auth')(app,db);
+
             resolve(router);
         });
     });

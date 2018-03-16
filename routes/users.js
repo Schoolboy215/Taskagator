@@ -1,4 +1,5 @@
 const userModel = require('../models/index').User;
+const ensureAuthenticated = require('./ensureAuthenticated');
 
 module.exports = function(app, db){
 	var url = require('url'),
@@ -30,6 +31,7 @@ module.exports = function(app, db){
     });
     router.put('/:name', function(req,res) {
         userController.update(req.params.name, req.body, function(result) {
+            console.log(req);
             res.json(result);
         });
     });
@@ -47,6 +49,6 @@ module.exports = function(app, db){
         });
     });
 
-    app.use('/api/users',router);
+    app.use('/api/users', ensureAuthenticated.ensureAuthenticated, router);
     return router;
 };
