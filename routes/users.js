@@ -49,6 +49,7 @@ module.exports = function(app, db){
         });
     });
 
-    app.use('/api/users', ensureAuthenticated.ensureAuthenticated, router);
+    //app.use('/api/users', ensureAuthenticated.ensureAuthenticated, router);
+    app.use('/api/users', router);
     return router;
 };

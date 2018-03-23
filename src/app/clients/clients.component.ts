@@ -25,6 +25,12 @@ export class ClientsComponent implements OnInit {
 
   loadClients() {
     this.clientsService.getAllClients().then(clients => {
+      /*Array.of(clients).forEach(client => {
+        var _client: Client = new Client(client['name']);
+        this.clientsService.getTasks(_client).subscribe(result => {
+          client['tasks'] = result;
+        });
+      });*/
       this.clients = clients;
     });
   }

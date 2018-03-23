@@ -5,6 +5,9 @@
             <mat-panel-title>
             {{client.name}}
             </mat-panel-title>
+            <mat-panel-description>
+                <span *ngIf="client.tasks">{{client.tasks.length}} tasks</span>
+            </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-action-row>
             <button mat-raised-button [routerLink]="['/clients/' + client.name]">Tasks</button>

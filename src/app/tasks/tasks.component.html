@@ -14,12 +14,12 @@
     <button mat-icon-button (click)="addFilter()"><mat-icon>add</mat-icon></button>
   </mat-card-actions>
 </mat-card>
-<mat-card>  <!--Tasks card-->
+<mat-card *ngIf="refinedTasks.length">  <!--Tasks card-->
   <mat-card-title>
     Tasks
   </mat-card-title>
   <mat-card-content>
-    <mat-accordion *ngIf="tasks">
+    <mat-accordion>
       <mat-expansion-panel *ngFor="let task of refinedTasks">
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -40,4 +40,7 @@
       </mat-expansion-panel>
     </mat-accordion>
   </mat-card-content>
+</mat-card>
+<mat-card *ngIf="!refinedTasks.length">
+  <h3>No tasks to show</h3>
 </mat-card>

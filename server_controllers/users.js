@@ -13,7 +13,9 @@ exports.createUser = function(name, callback) {
   });
 }
 exports.getAll = function(callback) {
-  userModel.find(function(err, users) {
+  userModel.find()
+  .sort('name').
+  exec((err, users) => {
     assert.equal(err, null);
     callback(users);
   });
