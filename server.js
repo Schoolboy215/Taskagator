@@ -36,7 +36,7 @@ app.use(passport.session());
 require('./routes/api')(app).then(result => {
     app.use('/api', result);
 
-    app.get('*', ensureAuthenticated.ensureAuthenticated, function(req,res,next) {
+    app.get('*', /*ensureAuthenticated.ensureAuthenticated,*/ function(req,res,next) {
         res.sendFile(path.join(__dirname, 'dist/index.html'));
     });
 

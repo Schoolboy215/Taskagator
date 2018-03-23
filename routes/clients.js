@@ -45,6 +45,7 @@ module.exports = function(app, db){
         });
     });
 
-    app.use('/api/clients', ensureAuthenticated.ensureAuthenticated, router);
+    //app.use('/api/clients', ensureAuthenticated.ensureAuthenticated, router);
+    app.use('/api/clients', router);
     return router;
 };

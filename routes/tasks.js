@@ -22,6 +22,7 @@ module.exports = function(app, db){
             res.json(tasks);
         })
     })
-    app.use('/api/tasks', ensureAuthenticated, router);
+    //app.use('/api/tasks', ensureAuthenticated, router);
+    app.use('/api/tasks', router);
     return router;
 };
