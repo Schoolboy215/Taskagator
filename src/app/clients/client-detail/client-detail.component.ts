@@ -42,6 +42,7 @@ export class ClientDetailComponent implements OnInit {
       });
     });
   }
+  
   getTasks(): void {
     this.clientService.getTasks(this.client).subscribe(tasks => {
       this.tasks = tasks;

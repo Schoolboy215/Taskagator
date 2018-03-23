@@ -6,7 +6,7 @@
             {{client.name}}
             </mat-panel-title>
             <mat-panel-description>
-                <span *ngIf="client.tasks">{{client.tasks.length}} tasks</span>
+                <span *ngIf="client.tasks && client.tasks.length">Tasks : {{client.tasks.length}}</span>
             </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-action-row>
