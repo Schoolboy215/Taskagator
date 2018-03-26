@@ -16,7 +16,9 @@ var taskSchema = Schema({
 userSchema = Schema({
     name: { type : String, unique : true, required : true },
     status: {type: String},
-    tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}]
+    tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}],
+    busyUntilDate : {type: Date},
+    busyUntilTime : {type: String}
 });
 
 exports.User = mongoose.model('User', userSchema);

@@ -5,12 +5,14 @@
       <mat-panel-title>
         {{user.name}}
       </mat-panel-title>
-      <mat-panel-description *ngIf="user.status">
-        {{user.status}}
+      <mat-panel-description *ngIf="user.busyUntilDate">
+        {{user.busyUntilDate | date: 'MM/dd'}} {{user.busyUntilTime}}
       </mat-panel-description>
     </mat-expansion-panel-header>
+    <p *ngIf="user.status">{{user.status}}</p>
     <mat-action-row>
       <button mat-raised-button (click)="updateStatusModal(user)">Set status</button>
+      <button mat-raised-button (click)="updateBusyUntilModal(user)">Set busy until</button>
       <button mat-raised-button [routerLink]="['/users/' + user.name]">Tasks</button>
       <button mat-raised-button color="warn" (click)="deleteUser(user)">Delete</button>
     </mat-action-row>

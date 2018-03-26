@@ -8,6 +8,14 @@
         <p>Status</p>
         <input matInput [(ngModel)]="data.status">
     </mat-form-field>
+    <mat-form-field *ngIf="data.updating == 'busyUntil'">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="data.busyUntilDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field *ngIf="data.updating == 'busyUntil'">
+      <input matInput [(ngModel)]="data.busyUntilTime" placeholder="Type a time">
+    </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>

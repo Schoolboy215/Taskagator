@@ -5,7 +5,7 @@ const clientModel = require('../models/index').Client;
 
 //User management functions
 exports.createUser = function(name, callback) {
-  userModel.create({name : name, status : ""}, function(err, result) {
+  userModel.create({name : name, status : "", busyUntilDate : "", busyUntilTime : ""}, function(err, result) {
     if (err)
       callback(err.errmsg.toString());
     else

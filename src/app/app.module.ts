@@ -9,7 +9,8 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {  MatCardModule, MatButtonModule, MatMenuModule, MatInputModule,
           MatFormFieldModule, MatDialogModule, MatSnackBarModule, MatListModule,
           MatDividerModule, MatExpansionModule, MatSelectModule,
-          MatChipsModule, MatIconModule } from '@angular/material/';
+          MatChipsModule, MatIconModule, MatDatepickerModule,
+          MatNativeDateModule, MatTooltipModule} from '@angular/material/';
 
 
 import { AppComponent } from './app.component';
@@ -71,7 +72,8 @@ const ROUTES = [
     MatCardModule, MatButtonModule, MatMenuModule, MatInputModule,
     MatFormFieldModule, MatDialogModule, MatSnackBarModule, MatListModule,
     MatDividerModule, MatExpansionModule, MatSelectModule,
-    MatChipsModule, MatIconModule,
+    MatChipsModule, MatIconModule, MatDatepickerModule,
+    MatNativeDateModule, MatTooltipModule,
 
     RouterModule.forRoot(ROUTES)
   ],
